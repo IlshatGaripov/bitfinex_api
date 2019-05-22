@@ -4,6 +4,7 @@ import numpy as np
 import datetime
 import time
 import os
+import calendar
 
 
 # Create a function to fetch the data
@@ -21,7 +22,7 @@ def fetch_data(start=1364767200000, stop=1545346740000, symbol='btcusd', interva
         data.extend(res)
         print('Retrieving data from {} to {} for {}'.format(pd.to_datetime(start, unit='ms'),
                                                             pd.to_datetime(end, unit='ms'), symbol))
-        time.sleep(1.5)
+        time.sleep(5)
     return data
 
 
@@ -30,14 +31,16 @@ bin_size = '1m'
 limit = 1000
 time_step = 1000 * 60 * limit
 
-t_start = datetime.datetime(2013, 4, 1, 0, 0)
-t_start = time.mktime(t_start.timetuple()) * 1000
+t_start = datetime.datetime(2019, 1, 14, 0, 0)
+t_start = calendar.timegm(t_start.timetuple()) * 1000
 
-t_stop = datetime.datetime(2018, 12, 20, 23, 59)
-t_stop = time.mktime(t_stop.timetuple()) * 1000
+t_stop = datetime.datetime(2019, 1, 15, 23, 59)
+t_stop = calendar.timegm(t_stop.timetuple()) * 1000
 
-api_v1 = bitfinex.bitfinex_v1.api_v1()
-pairs = api_v1.symbols()
+#api_v1 = bitfinex.bitfinex_v1.api_v1()
+#pairs = api_v1.symbols()
+
+pairs = ['btcusd']
 
 save_path = './data'
 
